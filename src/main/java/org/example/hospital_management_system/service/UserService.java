@@ -24,7 +24,6 @@ public class UserService {
             return ResponseEntity.status(404).body(response);
         }
         User existingUser = optionalUser.get();
-
         existingUser.setFirstName(userDTO.getFirstName());
         existingUser.setMiddleName(userDTO.getMiddleName());
         existingUser.setLastName(userDTO.getLastName());
@@ -62,9 +61,9 @@ public class UserService {
         return ResponseEntity.ok(response);
     }
 
-    public ResponseEntity<Response> getUserByEmail(String email) {
+    public ResponseEntity<Response> getUserByUsername(String username) {
         try {
-            User user = userRepository.findByEmail(email);
+            User user = userRepository.findByUsername(username);
             Map<String, Object> map = new HashMap<>();
             map.put("user", user);
             Response response = new Response(true, "success", map);

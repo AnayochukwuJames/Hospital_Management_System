@@ -1,8 +1,8 @@
 package org.example.hospital_management_system.dto;
 
-import com.ingryd.hms.enums.Role;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import org.example.hospital_management_system.enums.Role;
 import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDateTime;

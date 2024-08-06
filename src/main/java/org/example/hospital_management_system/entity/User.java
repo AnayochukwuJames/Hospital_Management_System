@@ -1,7 +1,9 @@
 package org.example.hospital_management_system.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.example.hospital_management_system.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +16,8 @@ import java.util.List;
 
 @Entity(name = "users")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +36,7 @@ public class User implements UserDetails {
     private String phoneNumber;
 
     @Column(nullable = false, length = 50, unique = true)
-    private String email;
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -51,8 +55,6 @@ public class User implements UserDetails {
 
     private LocalDateTime updatedAt;
 
-    public User() {}
-
     @PrePersist
     public void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -66,11 +68,6 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
     }
 
     @Override
